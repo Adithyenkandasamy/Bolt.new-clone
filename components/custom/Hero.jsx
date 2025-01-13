@@ -3,6 +3,7 @@ import Colors from '@/data/Colors';
 import Lookup from '@/data/Lookup'
 import { ArrowRight, Link } from 'lucide-react'
 import React, { useContext } from 'react'
+import { MessagesContext } from '@/context/MessagesContext';
 
 function Hero() {
   const [userInput,setUserInput] = React.useState();

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react' // Make sure to import useState
+import React, { useState } from 'react'; // Make sure to import useState
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import Header from '@/components/custom/Header'
 import { MessagesContext } from '@/context/MessagesContext'

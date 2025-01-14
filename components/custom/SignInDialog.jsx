@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
     Dialog,
     DialogContent,
@@ -11,12 +11,13 @@ import { Button } from '../ui/button';
 import { useGoogleLogin } from 'react-use-googlelogin';
 import axios from 'axios';
 import { UserDetailContext } from '@/context/UserDetailContext';
+import uuid4 from 'uuid4';
 
 function SignInDialog({ openDialog, closeDialog }) {
-    const { userDetail, setUserDetail } = React.useContext(UserDetailContext); 
-
-    const { signIn } = useGoogleLogin({
-        clientId: process.env.NEXT_PUBLIC_GOOGLE_AUTH_CLIENT_ID_KEY,
+const { userDetail, setUserDetail } = useContext(UserDetailContext); 
+const CreateUser=useMutation(ApiError.user.CreateUser);
+const { signIn } = useGoogleLogin({
+       clientId: process.env.NEXT_PUBLIC_GOOGLE_AUTH_CLIENT_ID_KEY,
         onSuccess: async (tokenResponse) => {
             console.log("Login Success: ", tokenResponse);
             const userInfo = await axios.get(
@@ -25,6 +26,16 @@ function SignInDialog({ openDialog, closeDialog }) {
             );
 
             console.log(userInfo);
+            const user=userInfo.data;
+            await CreateUser({
+                name:user?.name,
+                email:user?.email,
+                picture:user?.picture,
+                uid:uuid4()
+            })
+             
+            
+
             setUserDetail(userInfo?.data);
             closeDialog(false);
         },
@@ -38,7 +49,7 @@ function SignInDialog({ openDialog, closeDialog }) {
         <Dialog open={openDialog} onOpenChange={closeDialog}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Sign In</DialogTitle>
+                    <DialogTitle></DialogTitle>
                     <DialogDescription>
                         <div className="flex flex-col items-center justify-center gap-2">
                             <h2 className='font-bold text-2xl text-center text-white'>{Lookup.SIGNIN_HEADING}</h2>

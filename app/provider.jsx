@@ -11,7 +11,7 @@ function Provider({ children }) {
   
   return (
     <div>
-      <GoogleOAuthProvider clientId="<your_client_id>">
+      <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_AUTH_CLIENT_ID_KEY}>
       <UserDetailContext.Provider value={{ userDetail, setUserDetail }}>
         <MessagesContext.Provider value={{ messages, setMessages }}>
           <NextThemesProvider      

@@ -28,7 +28,10 @@ function SignInDialog({ openDialog, closeDialog }) {
             setUserDetail(userInfo?.data);
             closeDialog(false);
         },
-        onError: errorResponse => console.log("Login Failed: ", errorResponse),
+        onError: errorResponse => {
+            console.log("Login Failed: ", errorResponse);
+            closeDialog(false);
+        },
     });
 
     return (

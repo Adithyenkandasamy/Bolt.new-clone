@@ -8,6 +8,7 @@ import {
     DialogTrigger,
   } from "@/components/ui/dialog"
 import Lookup from '@/data/Lookup'  
+import { Button } from '../ui/button'
 
 function SignInDialog({openDialog,closeDialog}) {
   return (
@@ -15,9 +16,12 @@ function SignInDialog({openDialog,closeDialog}) {
   <DialogContent>
     <DialogHeader>
       <DialogTitle></DialogTitle>
-      <DialogDescription className="flex flex-col item-center justify-center">
-        <div>
-        <h2 className='font-bold text-2xl text-white'>{Lookup.SIGNIN_HEADING}</h2>
+      <DialogDescription>
+        <div className="flex flex-col item-center justify-center gap-2 ">
+          <h2 className='font-bold text-2xl text-center text-white'>{Lookup.SIGNIN_HEADING}</h2>
+          <p className='mt-2 text-center'>{Lookup.SIGNIN_SUBHEADING}</p>
+          <Button className='bg-blue-500 text-white w-44 hover:bg-blue-400 mt-2 mx-auto '>Sign In With Google</Button>
+          <p>{Lookup?.SIGNIn_AGREEMENT_TEXT}</p>
         </div>
         </DialogDescription>
     </DialogHeader>

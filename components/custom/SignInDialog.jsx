@@ -4,13 +4,13 @@ import axios from 'axios';
 import { UserDetailContext } from '@/context/UserDetailContext';
 import { useMutation } from 'react-query'; // Import useMutation
 import uuid4 from 'uuid4';
-import ApiError from 'next/dist/server/api-utils'; // Adjust this path to the correct location
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog"; // Import your dialog components
 import Lookup from '@/data/Lookup'; // Import your lookup data
+import { api } from '@/convex/_generated/api';
 
 function SignInDialog({ openDialog, closeDialog }) {
     const { userDetail, setUserDetail } = useContext(UserDetailContext); 
-    const CreateUser = useMutation(ApiError.user.CreateUser); // Ensure ApiError.user.CreateUser is defined
+    const CreateUser = useMutation(api.users.CreateUser); 
 
     const { signIn } = useGoogleLogin({
         clientId: process.env.NEXT_PUBLIC_GOOGLE_AUTH_CLIENT_ID_KEY,

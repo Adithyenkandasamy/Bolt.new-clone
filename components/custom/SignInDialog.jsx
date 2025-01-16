@@ -16,6 +16,7 @@ function SignInDialog({ openDialog, closeDialog }) {
     const { signIn } = useGoogleLogin({
         clientId: process.env.NEXT_PUBLIC_GOOGLE_AUTH_CLIENT_ID_KEY,
         onSuccess: async (tokenResponse) => {
+            try {
             console.log("Login Success: ", tokenResponse);
             const userInfo = await axios.get(
                 'https://www.googleapis.com/oauth2/v3/userinfo',
@@ -37,9 +38,13 @@ function SignInDialog({ openDialog, closeDialog }) {
 
             setUserDetail(userInfo?.data);
             closeDialog(false);
+            } catch (error) {
+                console.error("Error during sign-in process: ", error);
+            }
         },
         onFailure: (error) => {
             console.error("Login Failed: ", error);
+            console.log("Error details: ", JSON.stringify(error, null, 2));
         }
     });
 
